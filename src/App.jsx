@@ -30,8 +30,11 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/signup" element={user ? <Navigate to="/dashboard" /> : <Signup />} />
-          <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
+          {/* <Route path="/signup" element={user ? <Navigate to="/dashboard" /> : <Signup />} />
+          <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} /> */}
+
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/notes" element={<DemoNotes />} />
