@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { db } from '../../../firebase'; // Ensure db is imported correctly
+
+import { getDatabase, ref, push } from 'firebase/database';
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
@@ -7,15 +10,7 @@ const ContactUs = () => {
         message: '',
     });
 
-    const [faqOpen, setFaqOpen] = useState(null); // State to track open FAQ item
-
-    const toggleFaq = (index) => {
-        if (faqOpen === index) {
-            setFaqOpen(null); // Close the FAQ if clicked again
-        } else {
-            setFaqOpen(index); // Open the clicked FAQ
-        }
-    };
+    const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
 
     const handleChange = (e) => {
         setFormData({
@@ -26,35 +21,63 @@ const ContactUs = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log(formData);
-        // Reset form after submission (if needed)
-        setFormData({
-            name: '',
-            email: '',
-            message: '',
-        });
+
+        // Ensure all fields are filled
+        if (!formData.name || !formData.email || !formData.message) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        // Store the form data under 'ContactUs' node in Firebase using 'db'
+        const contactUsRef = ref(db, 'ContactUs'); // Use 'ref' from modular SDK
+        push(contactUsRef, formData)
+            .then(() => {
+                console.log('Form data submitted successfully');
+                setFormSubmitted(true); // Update state to show success message
+                setFormData({
+                    name: '',
+                    email: '',
+                    message: '',
+                });
+            })
+            .catch((error) => {
+                console.error('Error submitting form:', error);
+                alert('An error occurred while submitting the form. Please try again later.');
+            });
     };
 
+    // FAQ State and Toggle Functionality
+    const [faqOpen, setFaqOpen] = useState(null);
+
+    const toggleFaq = (index) => {
+        if (faqOpen === index) {
+            setFaqOpen(null); // Close the FAQ if clicked again
+        } else {
+            setFaqOpen(index); // Open the clicked FAQ
+        }
+    };
+
+    // FAQ Data
+    // FAQ Data
     const faqs = [
         {
-            question: "Question 1?",
-            answer: "Answer to question 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa.",
+            question: "When do we receive the payment of the Notes?",
+            answer: "You will receive the payment for your notes shortly after the buyer completes the purchase. Payments are typically processed within 1-3 business days, depending on the payment method chosen.",
         },
         {
-            question: "Question 2?",
-            answer: "Answer to question 2. Aliquam erat volutpat. Mauris non lorem eu dolor hendrerit dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue.",
+            question: "Are the notes authentic?",
+            answer: "Yes, all notes available on our website are authentic and provided by students who have previously taken the courses. We encourage our users to verify the quality and relevance of the notes before making a purchase.",
         },
         {
-            question: "Question 3?",
-            answer: "Answer to question 3. Nam pulvinar vitae neque et porttitor. Sed ultrices lorem ac sem viverra dictum. Praesent eu risus hendrerit ligula tempus pretium. Cras tempor, nulla ac placerat iaculis, mi est adipiscing lacus, ac tempus dui.",
+            question: "Which subject notes are available on the website?",
+            answer: "We offer a wide range of subject notes covering various disciplines, including but not limited to sciences, humanities, business, and engineering. You can explore our catalog to find notes that suit your academic needs.",
         },
     ];
 
     return (
-        <div className="max-w-8xl mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg">
+        <div className="max-w-8xl mx-auto mt-1 p-6 bg-white shadow-lg rounded-lg">
             {/* FAQ Section */}
-            <section className="mb-8">
+            <section className="mb-10">
                 <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
                 {faqs.map((faq, index) => (
                     <div key={index} className="mb-4">
@@ -85,22 +108,22 @@ const ContactUs = () => {
                 ))}
             </section>
 
-            {/* Company Owners Section */}
+            {/* Team Section */}
             <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">Meet Our Team</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-gray-100 p-4 rounded-lg">
-                        <h3 className="text-lg font-semibold mb-2">John Doe</h3>
-                        <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus placerat ultricies justo eu dignissim.</p>
+                        <h3 className="text-lg font-semibold mb-2">Yash Chavan</h3>
+                        <p className="text-gray-700">Email: yashchavan4628@gmail.com</p>
                     </div>
                     <div className="bg-gray-100 p-4 rounded-lg">
-                        <h3 className="text-lg font-semibold mb-2">Jane Smith</h3>
-                        <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus placerat ultricies justo eu dignissim.</p>
+                        <h3 className="text-lg font-semibold mb-2">Advait Dongre</h3>
+                        <p className="text-gray-700">Phone: 8830970886</p>
                     </div>
                 </div>
             </section>
 
-            {/* Contact Form */}
+            {/* Contact Form Section */}
             <section>
                 <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
                 <form onSubmit={handleSubmit}>
@@ -111,6 +134,8 @@ const ContactUs = () => {
                             type="text"
                             id="name"
                             name="name"
+                            value={formData.name}
+                            onChange={handleChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                             required
                         />
@@ -122,6 +147,8 @@ const ContactUs = () => {
                             type="email"
                             id="email"
                             name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                             required
                         />
@@ -132,6 +159,8 @@ const ContactUs = () => {
                         <textarea
                             id="message"
                             name="message"
+                            value={formData.message}
+                            onChange={handleChange}
                             rows="4"
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                             required
@@ -145,9 +174,12 @@ const ContactUs = () => {
                         Submit
                     </button>
                 </form>
+                {formSubmitted && (
+                    <p className="mt-4 text-green-600 font-semibold">Your message has been submitted successfully!</p>
+                )}
             </section>
         </div>
     );
-}
+};
 
 export default ContactUs;

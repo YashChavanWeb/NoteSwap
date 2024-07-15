@@ -10,6 +10,7 @@ import DemoNotes from './components/Landing Page/DemoNotes';
 import Dashboard from './components/Dashboard/Dashboard';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from '../firebase';
+import Footer from './components/Landing Page/Footer';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/notes" element={<DemoNotes />} />
           <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

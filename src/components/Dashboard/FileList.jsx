@@ -7,9 +7,8 @@ import { db } from '../../../firebase'; // Adjust the import path as necessary
 import Card from '../Card';
 import defaultImage from '../../assets/noteswap.png'; // Import default image
 import BuyNotePopup from './BuyNotePopup'; // Import BuyNotePopup component
-import { downloadNote } from '../../Utils';
 
-const FileList = ({ selectedCategory, currentUserUid }) => {
+const FileList = ({ selectedCategory, currentUserUid, searchQuery }) => {
     const [files, setFiles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showBuyPopup, setShowBuyPopup] = useState(false);
@@ -38,9 +37,19 @@ const FileList = ({ selectedCategory, currentUserUid }) => {
                 );
 
                 // Filter files based on selected category
-                const filteredFiles = selectedCategory
+                let filteredFiles = selectedCategory
                     ? filesList.filter((file) => file.category === selectedCategory)
                     : filesList;
+
+                // Filter files based on search query
+                if (searchQuery) {
+                    const query = searchQuery.toLowerCase();
+                    filteredFiles = filteredFiles.filter(
+                        (file) =>
+                            file.title.toLowerCase().includes(query) ||
+                            file.category.toLowerCase().includes(query)
+                    );
+                }
 
                 setFiles(filteredFiles);
             } else {
@@ -60,7 +69,7 @@ const FileList = ({ selectedCategory, currentUserUid }) => {
         return () => {
             unsubscribe();
         };
-    }, [selectedCategory]); // Run useEffect whenever selectedCategory changes
+    }, [selectedCategory, searchQuery]); // Run useEffect whenever selectedCategory or searchQuery changes
 
     const getCoverImage = async (pdfUrl) => {
         // Implement your logic to fetch cover image from PDF URL

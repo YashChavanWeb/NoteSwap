@@ -1,25 +1,33 @@
-// Card.jsx
-
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 
-const Card = ({ subject, thumbnail, category, onClickBuy }) => {
+const Card = ({ subject, thumbnail, category }) => {
+    const navigate = useNavigate(); // Initialize useNavigate
+
+    const handleBuyClick = () => {
+        // Navigate to the dashboard or any desired route
+        navigate('/dashboard'); // Replace '/dashboard' with your actual dashboard route
+    };
+
     return (
         <div className="relative bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 transform hover:scale-105">
             {/* Image with hover effect */}
             <div className="relative">
-                <img src={thumbnail} alt={subject} className="w-full h-60 object-cover transition duration-300 transform hover:scale-105" />
+                <img
+                    src={thumbnail}
+                    alt={subject}
+                    className="w-full h-60 object-cover transition duration-300 transform hover:scale-105"
+                />
                 {/* Overlay for hover effect */}
-                <div className="absolute inset-0 bg-black opacity-0 hover:opacity-50 transition duration-300"></div>
-                {/* Buy button */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
-                    <button
-                        onClick={onClickBuy} // Handle click on Buy button
-                        className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg focus:outline-none transition duration-300"
-                        style={{ backdropFilter: 'blur(10px)' }} // Apply backdrop filter when hovered
-                    >
-                        Buy Now
-                    </button>
+                <div className="absolute inset-0 bg-black opacity-0 hover:opacity-50 transition duration-300 flex items-center justify-center">
                 </div>
+                <button
+                    onClick={handleBuyClick} // Handle click on Buy button
+                    className="text-white bg-green-500 hover:bg-green-600 py-2 px-4 rounded-lg focus:outline-none transition duration-300"
+                    style={{ backdropFilter: 'blur(10px)' }} // Apply backdrop filter when hovered
+                >
+                    Buy Now
+                </button>
             </div>
             {/* Content section */}
             <div className="p-4">

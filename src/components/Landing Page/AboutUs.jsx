@@ -1,20 +1,39 @@
 import React from 'react';
+import yash from '../../assets/profile.jpg'
+import advait from '../../assets/advait.jpg'
+import gargi from '../../assets/gargi.jpg'
+
 
 const AboutUs = () => {
-    // Placeholder data for team members
     const teamMembers = [
-        { name: 'John Doe', position: 'CEO', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg' },
-        { name: 'Jane Smith', position: 'CTO', bio: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', imageUrl: 'https://randomuser.me/api/portraits/women/2.jpg' },
-        { name: 'David Brown', position: 'CFO', bio: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', imageUrl: 'https://randomuser.me/api/portraits/men/3.jpg' },
+        {
+            name: 'Yash Chavan',
+            position: 'Web Developer',
+            bio: 'Passionate about creating interactive and user-friendly web applications. Experienced in frontend development using modern technologies like React and Vue.js.',
+            imageUrl: yash
+        },
+        {
+            name: 'Gargi Betawadkar',
+            position: 'Software Developer',
+            bio: 'Experienced software engineer specializing in backend development. Proficient in building scalable and robust applications using languages like Java and Python.',
+            imageUrl: gargi
+        },
+        {
+            name: 'Advait Dongre',
+            position: 'Python Developer',
+            bio: 'Python enthusiast with a strong focus on data science and machine learning. Skilled in developing algorithms and implementing solutions to real-world problems.',
+            imageUrl: advait
+        },
     ];
 
+
     return (
-        <div className="max-w-8xl mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg">
+        <div className="max-w-8xl mx-auto mt-1 p-6 bg-white shadow-lg rounded-lg">
             {/* Company Overview */}
             <section className="mb-8">
-                <h2 className="text-2xl font-bold mb-4">About Us</h2>
+                <h2 className="text-2xl font-bold mb-4">About NoteSwap</h2>
                 <p className="text-gray-700">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.
+                    NoteSwap is a revolutionary platform designed to facilitate the exchange of academic knowledge through note-sharing. Our mission is to empower students by providing a convenient marketplace where they can buy and sell study materials such as lecture notes, study guides, and exam preparations.
                 </p>
             </section>
 
@@ -22,7 +41,7 @@ const AboutUs = () => {
             <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">Our Purpose</h2>
                 <p className="text-gray-700">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.
+                    At NoteSwap, we believe in fostering a collaborative learning environment where students can support each other’s academic journeys. By connecting students across different disciplines and educational institutions, we aim to enhance learning outcomes and promote knowledge sharing on a global scale.
                 </p>
             </section>
 
@@ -60,7 +79,7 @@ const AboutUs = () => {
             <section>
                 <h2 className="text-2xl font-bold mb-4">Additional Information</h2>
                 <p className="text-gray-700">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.
+                    For any inquiries or partnerships, please contact us at info@noteswap.com. We are committed to improving the educational experience for students worldwide.
                 </p>
             </section>
         </div>

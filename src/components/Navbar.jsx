@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../public/noteswap.png'; // Adjust the path based on your actual logo location
 
 const Navbar = ({ isAuthenticated }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,23 +11,31 @@ const Navbar = ({ isAuthenticated }) => {
 
     return (
         <nav className="bg-blue-500 p-4 sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto px-4">
+            <div className="max-w-8xl mx-auto px-4">
                 <div className="flex justify-between items-center">
-                    <div className="flex-shrink-0">
-                        <a href="/" className="text-white text-xl font-bold">Your Platform Name</a>
+                    {/* Logo and Title */}
+                    <div className="flex items-center"> {/* Updated here */}
+                        <Link to="/">
+                            {/* <img src={logo} alt="NoteSwap Logo" className="h-8 mr-2" /> Adjust size and margin as needed */}
+                            <span className="text-white text-xl font-bold">NoteSwap</span>
+                        </Link>
                     </div>
+
+                    {/* Desktop Menu */}
                     <div className="hidden md:block">
                         <div className="ml-4 flex items-center space-x-4">
-                            <a href="/" className="text-white hover:text-gray-200">Home</a>
-                            <a href="/notes" className="text-white hover:text-gray-200">Notes</a>
-                            <a href="/about" className="text-white hover:text-gray-200">About</a>
-                            <a href="/contact" className="text-white hover:text-gray-200">Contact</a>
+                            <Link to="/" className="text-white hover:text-gray-200">Home</Link>
+                            <Link to="/notes" className="text-white hover:text-gray-200">Notes</Link>
+                            <Link to="/about" className="text-white hover:text-gray-200">About</Link>
+                            <Link to="/contact" className="text-white hover:text-gray-200">Contact Us</Link>
                             {/* Conditional Dashboard link */}
                             {isAuthenticated && (
                                 <Link to="/dashboard" className="text-white hover:text-gray-200">Dashboard</Link>
                             )}
                         </div>
                     </div>
+
+                    {/* Mobile Menu Button */}
                     <div className="md:hidden">
                         <button className="text-white focus:outline-none" onClick={toggleMenu}>
                             <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -39,7 +48,8 @@ const Navbar = ({ isAuthenticated }) => {
                         </button>
                     </div>
                 </div>
-                {/* Mobile menu */}
+
+                {/* Mobile Menu */}
                 <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} mt-2 transition-all duration-300 ease-in-out`}>
                     <div className="fixed inset-0 bg-blue-500 bg-opacity-75 z-50">
                         <div className="flex justify-end p-4">
@@ -50,10 +60,10 @@ const Navbar = ({ isAuthenticated }) => {
                             </button>
                         </div>
                         <div className="flex flex-col items-start py-2 px-4">
-                            <a href="/" className="text-white hover:text-gray-200 py-2">Home</a>
-                            <a href="/notes" className="text-white hover:text-gray-200 py-2">Notes</a>
-                            <a href="/about" className="text-white hover:text-gray-200 py-2">About</a>
-                            <a href="/contact" className="text-white hover:text-gray-200 py-2">Contact</a>
+                            <Link to="/" className="text-white hover:text-gray-200 py-2">Home</Link>
+                            <Link to="/notes" className="text-white hover:text-gray-200 py-2">Notes</Link>
+                            <Link to="/about" className="text-white hover:text-gray-200 py-2">About</Link>
+                            <Link to="/contact" className="text-white hover:text-gray-200 py-2">Contact</Link>
                             {/* Conditional Dashboard link */}
                             {isAuthenticated && (
                                 <Link to="/dashboard" className="text-white hover:text-gray-200 py-2">Dashboard</Link>
