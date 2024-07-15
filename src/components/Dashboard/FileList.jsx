@@ -94,6 +94,7 @@ const FileList = ({ selectedCategory, currentUserUid, searchQuery }) => {
         setPopupPosition({ left, top });
     };
 
+
     const handleDeleteClick = async (noteId, storageUrl) => {
         try {
             // Delete from Realtime Database
