@@ -1,8 +1,55 @@
-# React + Vite
+---
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# NoteSwap
 
-Currently, two official plugins are available:
+NoteSwap is an innovative platform designed for academic knowledge sharing through note exchange. Built with React and Firebase, it allows students to upload, browse, and purchase study materials securely. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Demo: https://noteswap.netlify.app/
+
+## Features
+
+- **Upload Notes**: Seamlessly upload your study notes in PDF format.
+- **Browse and Buy**: Explore and purchase a variety of study materials uploaded by other students.
+- **Secure Transactions**: Ensure privacy and security with secure transaction handling.
+
+## Getting Started
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/yourusername/noteswap.git
+   cd noteswap
+   ```
+
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set Up Firebase**
+
+   Create a Firebase project and add your configuration to the `firebase.js` file.
+
+4. **Run the Application**
+
+   ```bash
+   npm start
+   ```
+
+   Navigate to `http://localhost:3000` in your browser to start using NoteSwap.
+
+## Contributing
+
+Feel free to contribute by submitting issues or pull requests. For more details, check out the [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+
+
+
+
